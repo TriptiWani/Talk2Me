@@ -1,0 +1,59 @@
+<div class="groupview">
+  <div class="group_header">
+    <div class="group_header_left">
+      <%= cl_image_tag @group.grp_image %>
+    </div>
+    <div class="group_header_right">
+      <div class="group_name">
+        <%= @group.grp_name %>
+      </div>
+      <div class="add_contact">
+      </div>
+    </div>
+  </div>
+  <div class="group_body">
+    <div class="group_body_left">
+      <div class="group_body_left_top">
+        <label for="usersearch">Add User</label>
+        <input type="text" name="usernamesearch" id="search" placeholder="@name"></input>
+        <%#= form_tag(users_path, method: "get") do %>
+            <!-- <label for="usersearch">Add User</label>
+            <input type="text" name="usernamesearch" id="search" placeholder="@name"></input>
+            <input type="text" name="group_id" hidden="true" value="<%= @group.id %>"></input> -->
+      <!-- "<span class='glyphicon glyphicon-search' aria-hidden='true'></span>".html-safe -->
+            <%#= submit_tag "Search", class: "searchButton" %>
+          <%# end %>
+      </div>
+      <div class="group_body_left_bottom">
+        <label for="users">Members:</label>
+        <ul class="group_members_list">
+          <% @group.contacts.each do |contact| %>
+            <li>
+              <% if (contact.user.id).eql?(@group.grp_admin_id) %>
+                <%= link_to contact.user.name , contact.user, :class => 'glyphicon glyphicon-king' %>
+                <%= link_to (cl_image_tag contact.user.image , :class => 'user_image') , contact.user   %>
+              <% else %>
+                <%= link_to contact.user.name , contact.user , :class => 'glyphicon glyphicon-pawn'%>
+                <%= link_to (cl_image_tag contact.user.image , :class => 'user_image') , contact.user   %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="group_body_right">
+      <div class="panel panel-default">
+        <% if @group.messages.any? %>
+          <div class="panel-body" id="messages">
+            <%= render partial: 'messages/message', collection: @group.messages%>
+          </div>
+        <%else%>
+          <div class="panel-body hidden" id="messages">
+          </div>
+        <%end%>
+      </div>
+
+        <%= render partial: 'messages/message_form', locals: {message: @message, group: @group}%>
+    </div>
+  </div>
+</div>

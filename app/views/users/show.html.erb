@@ -1,0 +1,20 @@
+<h1>Users Details</h1>
+<table>
+  <tr>
+    <td>Image</td>
+    <%#= raise "help" %>
+    <td><%= cl_image_tag @user.image %></td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <td>Email Id</td>
+    <td><%= @user.email_id %></td>
+  </tr>
+  <tr>
+    <td>Phone Number</td>
+    <td><%= @user.phone_number %></td>
+  </tr>
+</table>

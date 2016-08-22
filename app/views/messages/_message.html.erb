@@ -1,0 +1,5 @@
+<% if (message.user).eql?(@current_user) %>
+  <p class="current_user"><%=message.content%>:<strong class="message"><%=message.user.name%></strong></p>
+<% else %>
+  <p><strong><%=message.user.name%>:</strong> <%=message.content%></p>
+<% end %>

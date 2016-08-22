@@ -1,0 +1,13 @@
+<div class="edit_user">
+  <div class="edit_user_top">
+    <div class="edit_user_top_left">
+      <%= cl_image_tag @user.image , :class => 'user_display_image' %>
+    </div>
+    <div class="edit_user_top_right">
+      <%= @user.name %>
+    </div>
+  </div>
+  <div class="edit_user_bottom">
+    <%= render :partial => 'form' %>
+  </div>
+</div>

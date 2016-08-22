@@ -1,0 +1,105 @@
+.group_header {
+
+}
+
+p.current_user {
+    text-align: right;
+}
+
+.group_header_left {
+  width: 20%;
+  display: inline-block;
+}
+.user_image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+.group_header_left >img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+.group_name{
+  display: inline-block;
+  text-align:center;
+}
+.add_contact{
+  display: inline-block;
+  text-align: right;
+}
+.group_header_right{
+  width: 65%;
+  display: inline-block;
+}
+.group_body_left {
+  width: 25%;
+  display: inline-block;
+  border: 1px solid black;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+.group_body_right {
+  width: 65%;
+  display: inline-block;
+  border: 1px solid black;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+.group_body_left_top{
+  display: block;
+  padding-bottom: 100px;
+}
+.group_body_left_bottom {
+  display: block;
+}
+.group_body_left_bottom > ul > li {
+  list-style: none;
+}
+
+.current_user_message {
+  position-right: 10px;
+}
+.camera_message {
+
+}
+.edit_user_top, .edit_user_bottom{
+  margin: 2em;
+}
+.edit_user_top_left{
+  display: inline-block;
+  width: 35%;
+}
+.user_display_image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+.edit_user_top_right{
+  display: inline-block;
+  width:55%;
+  font-size: 40px;
+}
+(.user_image_field > *)){
+  display: inline-block;
+}
+input#search{
+  width:80%;
+}
+div.title{
+  display: inline-block;
+  width:35%;
+}
+div.controls{
+  display: inline-block;
+  width: 60%
+}
+.controls > a{
+  text-align: right;
+}
+.footer_options{
+  border-color: white;
+}

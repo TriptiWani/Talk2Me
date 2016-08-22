@@ -1,0 +1,25 @@
+<%= form_for @user,:html => {:multipart => true}  do |f| %>
+        <fieldset>
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+        </fieldset>
+        <fieldset>
+            <%= f.label :email_id %>
+            <%= f.text_field :email_id %>
+        </fieldset>
+        <fieldset>
+            <%= f.label :password %>
+            <%= f.password_field :password %>
+        </fieldset>
+        <fieldset>
+            <%= f.label :confirm_Password %>
+            <%= f.password_field :password_confirmation %>
+        </fieldset>
+        <fieldset>
+          <div class="user_image_field">
+            <%= f.label :image %>
+            <%= cl_image_upload_tag :image %>
+          </div>
+        </fieldset>
+        <%= f.submit %>
+<% end %>

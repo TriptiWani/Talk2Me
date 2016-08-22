@@ -1,0 +1,27 @@
+<div id="header">
+    <div class="col-xs-12">
+      <div class="title">
+        <h2>Talk2Me</h2>
+      </div>
+      <div class="controls row">
+        <% if @current_user.present? %>
+          <%= link_to  'Log Out' , login_path ,:method => 'destroy'%>
+        <% else %>
+          <%= link_to  'Sign Up' , new_user_path %>
+          <%= link_to  'Log In' , login_path %>
+        <% end %>
+    </div>
+  </div>
+  <div id="flashnotice">
+    <% if flash[:notice] %>
+      <div class="success alert-success" role="success">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger product_details" role="alert">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+  </div>
+</div>

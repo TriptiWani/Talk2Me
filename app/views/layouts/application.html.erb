@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Talk2Me</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#= cloudinary_js_config %>
+  </head>
+
+  <body>
+    <div class="container">
+      <%= render :partial => 'layouts/header_form' %>
+      <%= yield %>
+      <%= render :partial => 'layouts/footer_form' %>
+    </div>
+  </body>
+
+</html>

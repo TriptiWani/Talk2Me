@@ -1,0 +1,11 @@
+<%= form_for @group,:html => {:multipart => true}  do |f| %>
+        <fieldset>
+            <%= f.label :GroupName %>
+            <%= f.text_field :grp_name %>
+        </fieldset>
+        <fieldset>
+            <%= f.label :GroupImage %>
+            <%= cl_image_upload_tag :grp_image %>
+        </fieldset>
+        <%= f.submit %>
+<% end %>
