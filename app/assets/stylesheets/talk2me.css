@@ -83,9 +83,6 @@ p.current_user {
   width:55%;
   font-size: 40px;
 }
-(.user_image_field > *)){
-  display: inline-block;
-}
 input#search{
   width:80%;
 }
