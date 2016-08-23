@@ -1,14 +1,6 @@
 
 // var typing_timeout = undefined;
 var geoLocation = function(){
-  // var latitude;
-  // var longitude;
-  // navigator.geolocation.getCurrentPosition(function(location) {
-  //   latitude = location.coords.latitude;
-  //   longitude = location.coords.longitude;
-  // console.log(location.coords.latitude);
-  // console.log(location.coords.longitude);
-  // });
   function initMap() {
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
