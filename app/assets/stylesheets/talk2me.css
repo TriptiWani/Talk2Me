@@ -52,6 +52,9 @@ p.current_user {
   display: block;
   padding-bottom: 100px;
 }
+.group_body_left_top_1 {
+  padding-bottom: 100px;
+}
 .group_body_left_bottom {
   display: block;
 }
@@ -67,10 +70,16 @@ p.current_user {
 }
 .edit_user_top, .edit_user_bottom{
   margin: 2em;
+  border: 1px solid black;
+  margin: 0.5em;
+  padding: 0.5em;
 }
 .edit_user_top_left{
   display: inline-block;
   width: 35%;
+  border: 1px solid black;
+  margin: 0.5em;
+  padding: 0.5em;
 }
 .user_display_image {
   width: 100px;
@@ -82,6 +91,9 @@ p.current_user {
   display: inline-block;
   width:55%;
   font-size: 40px;
+  border: 1px solid black;
+  margin: 0.5em;
+  padding: 0.5em;
 }
 input#search{
   width:80%;
@@ -99,4 +111,17 @@ div.controls{
 }
 .footer_options{
   border-color: white;
+}
+.old_messages {
+  text-align: center;
+  color:grey;
+  font-size: 10px;
+}
+.time {
+  color:grey;
+  font-size: 10px;
+}
+.message_images {
+  border-radius: 1em;
+  border: 1px solid black;
 }

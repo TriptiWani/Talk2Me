@@ -10,6 +10,31 @@
   </head>
 
   <body>
+    <script type="text/javascript">
+//<%# those are variables we need to use in javascript we are using in map.js %>
+var myLatLng;
+var lat;
+var lon;
+navigator.geolocation.getCurrentPosition(function(location) {
+  lat = location.coords.latitude;
+  lon = location.coords.longitude;
+});
+var myLatLng = {
+   lat: lat,
+   lng: lon
+};
+</script>
+
+
+
+<%# <!-- google map API key - AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc -->
+%>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc&callback=initMap" async defer></script>
+    <div id="map" class="map"></div>
+    <script>
+      var app = app || {};
+      app.current_user = <%= @current_user.id if @current_user.present?%>;
+    </script>
     <div class="container">
       <%= render :partial => 'layouts/header_form' %>
       <%= yield %>

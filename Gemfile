@@ -33,7 +33,9 @@ gem 'rails_12factor'
 gem 'cloudinary'
 # including bootstrap for formating
 gem 'bootstrap-sass'
-
+#httparty
+gem 'httparty'
+gem 'geocoder'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

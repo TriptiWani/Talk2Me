@@ -3,19 +3,16 @@
   <%= f.text_area :content, class: "form-control", data: {textarea: "message"}%>
 
   <%= f.hidden_field :group_id, value: group.id %>
-  <div class="camera_message hidden">
-    <div id="my_camera" style="width:320px; height:240px;"></div>
-      <div id="my_result"></div>
-      <script>
+  <div id="typing">
 
-      </script>
-      <button id="clickMe">Capture Me</button>
   </div>
   <div class="chat_options">
     <%= f.submit "Send", class: "btn btn-primary messagesendbutton",  data: {send: "message"}%>
     <span class=" activate_camera glyphicon glyphicon-camera" aria-hidden="true"></span>
-    <%= link_to '<span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>'.html_safe , users_path %>
-    <%= link_to '<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>'.html_safe , users_path %>
+    <span class=" activate_video glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
+    <%#= link_to '<span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>'.html_safe , users_path %>
+    <span class=" activate_video glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+    <%#= link_to '<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>'.html_safe , users_path %>
     <!-- <button class="send_gif btn btn-primary"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span></button> -->
   </div>
 <%end%>

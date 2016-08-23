@@ -1,5 +1,23 @@
+<%# raise "help" %>
+
+<% message_type = check_msg_type(message.content) %>
 <% if (message.user).eql?(@current_user) %>
-  <p class="current_user"><%=message.content%>:<strong class="message"><%=message.user.name%></strong></p>
+  <% if message_type.eql?'image' %>
+    <p class="current_user time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M") %></p><p class="current_user"><%= cl_image_tag message.content ,:class=> "message_images"%>:<strong class="message"><%=message.user.name%></strong></p>
+  <% elsif message_type.eql?'link' %>
+    <p class="current_user time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p class="current_user"><%= link_to  message.content, message.content %>:<strong class="message"><%=message.user.name%></strong></p>
+  <% else %>
+    <p class="current_user time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p class="current_user"><%=message.content%>:<strong class="message"><%=message.user.name%></strong></p>
+  <% end %>
+
 <% else %>
-  <p><strong><%=message.user.name%>:</strong> <%=message.content%></p>
+  <% if message_type.eql?'image' %>
+    <p class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p><strong><%=message.user.name%>:</strong> <%= cl_image_tag message.content ,:class=> "message_images"%></p>
+  <% elsif message_type.eql?'link' %>
+    <p class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p><strong><%=message.user.name%>:</strong>
+    <%= link_to  message.content, message.content %>
+  </p>
+  <% else %>
+    <p  class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p><strong><%=message.user.name%>:</strong> <%=message.content%></p>
+  <% end %>
 <% end %>

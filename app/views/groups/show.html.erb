@@ -14,8 +14,13 @@
   <div class="group_body">
     <div class="group_body_left">
       <div class="group_body_left_top">
-        <label for="usersearch">Add User</label>
-        <input type="text" name="usernamesearch" id="search" placeholder="@name"></input>
+        <div class="group_body_left_top_1">
+          <%= link_to "Edit Group", edit_group_path(@group) %>
+        </div>
+        <div class="group_body_left_top_2">
+          <label for="usersearch">Add User</label>
+          <input type="text" name="usernamesearch" id="search" placeholder="@name"></input>
+        </div>
         <%#= form_tag(users_path, method: "get") do %>
             <!-- <label for="usersearch">Add User</label>
             <input type="text" name="usernamesearch" id="search" placeholder="@name"></input>
@@ -27,25 +32,36 @@
       <div class="group_body_left_bottom">
         <label for="users">Members:</label>
         <ul class="group_members_list">
-          <% @group.contacts.each do |contact| %>
+          <% @group.users.each do |contact| %>
             <li>
-              <% if (contact.user.id).eql?(@group.grp_admin_id) %>
-                <%= link_to contact.user.name , contact.user, :class => 'glyphicon glyphicon-king' %>
-                <%= link_to (cl_image_tag contact.user.image , :class => 'user_image') , contact.user   %>
+              <% if (contact).eql?(@current_user) %>
+                <% group_member_name = 'Me' %>
               <% else %>
-                <%= link_to contact.user.name , contact.user , :class => 'glyphicon glyphicon-pawn'%>
-                <%= link_to (cl_image_tag contact.user.image , :class => 'user_image') , contact.user   %>
+                <% group_member_name = contact.name %>
+              <% end %>
+              <% if (contact.id).eql?(@group.grp_admin_id) %>
+                <%= link_to group_member_name , contact, :class => 'glyphicon glyphicon-king' %>
+                <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
+              <% else %>
+                <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
+                <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
               <% end %>
             </li>
           <% end %>
         </ul>
       </div>
     </div>
+
     <div class="group_body_right">
       <div class="panel panel-default">
+        <div>
+          <% if @group.messages.count > 10 %>
+            <p class="old_messages">View older messages</p>
+          <% end %>
+        </div>
         <% if @group.messages.any? %>
           <div class="panel-body" id="messages">
-            <%= render partial: 'messages/message', collection: @group.messages%>
+            <%= render partial: 'messages/message', collection: @group.messages.order('created_at desc').take(10).reverse%>
           </div>
         <%else%>
           <div class="panel-body hidden" id="messages">
