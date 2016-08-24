@@ -24,7 +24,8 @@
         user: message.user.name,
         category: message.category,
         id: message.user.id,
-        created_at: message.created_at
+        created_at: message.created_at,
+        group_id: message.group_id
       # head :ok
       respond_to do |format|
         format.html  # index.html.erb
