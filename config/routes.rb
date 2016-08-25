@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   # this is ajax endpoint for user name search
   get '/incremental_user_search' => 'users#incremental_search'
   get '/incremental_user_add' => 'groups#add_users_to_group'
-    post '/add_image_as_message' => 'messages#create'
+  post '/add_image_as_message' => 'messages#create'
+  post '/group/:group_id/user/:user_id' => 'group#remove_user_from_group' , as: "removeusersfromgroup"
 end

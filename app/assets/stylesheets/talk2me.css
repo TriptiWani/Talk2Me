@@ -1,11 +1,13 @@
 .container{
-  border: 1px solid black;
+  border: 4px solid #8c407e;
   margin-bottom: 1em;
   margin: 1em;
   padding-top:1em;
+  color: #8c407e;
+  min-height: 98vh;
 }
-.group_header {
-
+.group_body {
+  margin-bottom: 1em;
 }
 .header_left,.header_right {
   display:inline-block;
@@ -51,16 +53,16 @@ div.display_map,p.display_map {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1px solid black;
+  border: 1px solid #8c407e;
 }
 .group_body_left_top_0 {
-  margin:50px;
+  margin:20px;
 }
-.group_image >img {
+.group_image >img , .group_image{
   width: 100px;
   height: 100px;
   border-radius: 1em;
-  border: 1px solid black;
+  border: 1px solid #8c407e;
 }
 .group_name{
   display: inline-block;
@@ -78,14 +80,14 @@ div.display_map,p.display_map {
 .group_body_left {
   width: 25%;
   display: inline-block;
-  border: 1px solid black;
+  border: 1px solid #8c407e;
   margin: 0.5em;
   padding: 0.5em;
 }
 .group_body_right {
   width: 65%;
   display: inline-block;
-  border: 1px solid black;
+  border: 1px solid #8c407e;
   margin: 0.5em;
   padding: 0.5em;
 }
@@ -111,28 +113,28 @@ div.display_map,p.display_map {
 }
 .edit_user_top, .edit_user_bottom{
   margin: 2em;
-  border: 1px solid black;
+  /*border: 1px solid #8c407e;*/
   margin: 0.5em;
   padding: 0.5em;
 }
 .edit_user_top_left{
   display: inline-block;
   width: 35%;
-  border: 1px solid black;
+  /*border: 1px solid #8c407e;*/
   margin: 0.5em;
   padding: 0.5em;
 }
 .user_display_image {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
-  border: 1px solid black;
+  border-radius: 1em;
+  border: 1px solid #8c407e;
 }
 .edit_user_top_right{
   display: inline-block;
   width:55%;
   font-size: 40px;
-  border: 1px solid black;
+  /*border: 1px solid #8c407e;*/
   margin: 0.5em;
   padding: 0.5em;
 }
@@ -151,7 +153,12 @@ div.controls{
   text-align: right;
 }
 .footer_options{
-  border-color: white;
+  border-color: #8c407e;
+  background-color: #8c407e;
+  height:20px;
+}
+.footer_options > a{
+  color: white;
 }
 .old_messages {
   text-align: center;
@@ -164,10 +171,24 @@ div.controls{
 }
 .message_images {
   border-radius: 1em;
-  border: 1px solid black;
+  border: 1px solid #8c407e;
 }
 .messagediscardbutton{
   margin-left: 20px;
+  display:inline-block;
+  color:#fff;
+  border:1px solid #8c407e;
+  background:#8c407e;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  cursor:pointer;
+  vertical-align:middle;
+  max-width: 100px;
+  padding: 5px;
+  text-align: center;
+}
+.messagesendbutton{
+  background: #8c407e;
+  border: 1px solid #8c407e;
 }
 .map{
   width: 100%;
@@ -184,7 +205,7 @@ div.controls{
 .preview {
   width:90%;
   height: 300px;
-  border: 1px solid black;
+  border: 1px solid #8c407e;
   /*padding:0.5em;*/
   margin:1em;
 }
@@ -200,5 +221,36 @@ div.controls{
 .say_yes, .say_no {
   height:50px;
   display:block;
-  border: 1px solid black;
+  border: 1px solid #8c407e;
+}
+.groups_list {
+  list-style: none;
+  align-content: center;
+}
+
+.glyphicon-camera, .glyphicon-facetime-video, .glyphicon-map-marker{
+  display:inline-block;
+  color:#fff;
+  border:1px solid #8c407e;
+  background:#8c407e;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  cursor:pointer;
+  vertical-align:middle;
+  max-width: 100px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 1em;
+}
+a:hover,input[type="submit"]:hover,.messagesendbutton:hover, .messagediscardbutton:hover {
+    color:#8c407e;
+}
+input[type="submit"]{
+  margin: 5px;
+}
+.navbar-inverse{
+  background-color: #8c407e;
+  /*margin: 1em;*/
+}
+a{
+  color: #8c407e;
 }

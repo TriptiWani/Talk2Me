@@ -7,5 +7,26 @@
             <%= f.label :GroupImage %>
             <%= cl_image_upload_tag :grp_image %>
         </fieldset>
+
+        <div class="grp_members">
+            <label for="users">Members:</label>
+            <ul class="group_members_list">
+              <% @group.users.each do |contact| %>
+                <li>
+                  <p>
+                    <% group_member_name = contact.name %>
+                  </p>
+                  <% if (contact.id).eql?(@group.grp_admin_id) %>
+                    <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
+                    <%= link_to group_member_name , contact, :class => 'glyphicon glyphicon-king' %>
+                  <% else %>
+                    <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
+                    <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
+                    <%#= link_to  '<span class="glyphicon glyphicon glyphicon-scissors" aria-hidden="true"></span>'.html_safe, removeusersfromgroup_path(@group,contact)  ,:method => post%>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+        </div>
         <%= f.submit %>
 <% end %>

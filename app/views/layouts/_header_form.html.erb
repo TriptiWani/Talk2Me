@@ -18,6 +18,7 @@
           <div class="header_right_bottom">
             <% if @current_user.present? %>
               <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">  <%= link_to  'My Groups' , groups_path %></button>
                 <button type="button" class="btn btn-default">  <%= link_to  'New Group' , new_group_path %></button>
                 <button type="button" class="btn btn-default">  <%= link_to  'Log Out' , login_path ,:method => 'delete'%></button>
               </div>
@@ -34,12 +35,12 @@
   <div id="flashnotice">
     <% if flash[:notice] %>
       <div class="success alert-success" role="success">
-        <%= flash[:notice] %>
+        <%#= flash[:notice] %>
       </div>
     <% end %>
     <% if flash[:alert] %>
       <div class="alert alert-danger product_details" role="alert">
-        <%= flash[:alert] %>
+        <%#= flash[:alert] %>
       </div>
     <% end %>
   </div>

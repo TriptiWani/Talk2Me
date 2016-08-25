@@ -84,6 +84,16 @@ class GroupsController < ApplicationController
     # render :json => @group, :include => :users, :status => :ok
   end
 
+  def remove_user_from_group
+    group_id = params[:group_id]
+    user_id = params[:user_id]
+    @group = Group.find_by(:id => group_id)
+    user = User.find_by( :id => user_id)
+
+    (@group.users).delete(user)
+    redirect_to @group
+  end
+
   private
   def group_params
     params.require(:group).permit(:grp_name, :grp_image)

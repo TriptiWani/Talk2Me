@@ -24,10 +24,10 @@
           </div>
         </div>
         <div class="group_body_left_top_1">
-          <%= link_to "Edit Group", edit_group_path(@group) %>
+          <%= link_to "Edit Group", edit_group_path(@group),:class => 'glyphicon glyphicon-pencil' %>
         </div>
         <div class="group_body_left_top_2">
-          <label for="usersearch">Add User</label>
+          <label class="glyphicon glyphicon-plus" for="usersearch">Add User</label>
           <input type="text" name="usernamesearch" id="search" placeholder="name"></input>
         </div>
       </div>
@@ -36,22 +36,16 @@
         <ul class="group_members_list">
           <% @group.users.each do |contact| %>
             <li>
-              <% if (contact).eql?(@current_user) %>
-              <p class="col-xs-1">
-                <% group_member_name = 'Me' %>
-              </p>
-
-              <% else %>
-              <p class="col-xs-1">
+              <p>
                 <% group_member_name = contact.name %>
               </p>
-              <% end %>
               <% if (contact.id).eql?(@group.grp_admin_id) %>
+                <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
                 <%= link_to group_member_name , contact, :class => 'glyphicon glyphicon-king' %>
-                <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
               <% else %>
-                <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
                 <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
+                <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
+                <%#= link_to  '<span class="glyphicon glyphicon glyphicon-scissors" aria-hidden="true"></span>'.html_safe, removeusersfromgroup_path(@group,contact) ,:method => post  %>
               <% end %>
             </li>
           <% end %>
