@@ -35,7 +35,7 @@ gem 'cloudinary'
 gem 'bootstrap-sass'
 #httparty
 gem 'httparty'
-gem 'geocoder'
+# gem 'geocoder'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

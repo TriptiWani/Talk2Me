@@ -1,6 +1,20 @@
 
 var last_image;
+var displayLocation = function(coord,id) {
+  var myLatLng= JSON.parse(coord);
+  var map = new google.maps.Map(document.getElementById('map-'+id), {
+    center: myLatLng,
+    scrollwheel: false,
+    zoom: 16
+  });
 
+  // Create a marker and set its position.
+  var marker = new google.maps.Marker({
+    map: map,
+    position: myLatLng,
+    title: 'address'
+  });
+};
 // var typing_timeout = undefined;
 var showPreview = function($el){
   console.log('showing');
@@ -13,70 +27,95 @@ var clearPreview = function(){
   $('.preview').addClass('hidden');
 };
 
-var geoLocation = function($el){
-  console.log('inside geolocation');
-  $script = $('<script async defer> </script>');
-  $script.attr('src',"https://maps.googleapis.com/maps/api/js?key=AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc&callback=initMap");
-  return $script;
-  // $script.appendTo($el);
 
-};
 function initMap() {
-      if ($('#map').length === 0) {
-        return;
-      }
-      $map = $('<div> </div>');
-      $map.addClass('map');
-      $map.attr('id','map');
-      $map.appendTo('.preview_left');
-      // Create a map object and specify the DOM element for display.
-      var myLatLng;
-      var lat;
-      var lon;
-      navigator.geolocation.getCurrentPosition(function(location) {
-        lat = location.coords.latitude;
-        lon = location.coords.longitude;
-        myLatLng = {
-           lat: lat,
-           lng: lon
-        };
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: myLatLng,
-          scrollwheel: false,
-          zoom: 16
-        });
+  $map = $('<div> </div>');
+  $map.addClass('map');
+  $map.attr('id','map');
+  $map.appendTo('.preview_left');
+  // Create a map object and specify the DOM element for display.
+  var myLatLng;
+  var lat;
+  var lon;
+  navigator.geolocation.getCurrentPosition(function(location) {
+    lat = location.coords.latitude;
+    lon = location.coords.longitude;
+    myLatLng = {
+       lat: lat,
+       lng: lon
+    };
+    last_image = myLatLng;
+    console.log('location from iinside',last_image);
+    $('#message_content').val('NLOC'+JSON.stringify(last_image));
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: myLatLng,
+      scrollwheel: false,
+      zoom: 16
+    });
 
-        // Create a marker and set its position.
-        var marker = new google.maps.Marker({
-          map: map,
-          position: myLatLng,
-          title: 'address'
-        });
-      });
+    // Create a marker and set its position.
+    var marker = new google.maps.Marker({
+      map: map,
+      position: myLatLng,
+      title: 'address'
+    });
+  });
 
-      // console.log(myLatLng);
-
-    }
+}
 
 var emptyMessageField = function(){
   setTimeout(function(){
     $('#message_content').val('');
+    $('#message_content_display').val('');
   },10);
 };
+
 var userTyping = function(){
-  $typing = $('<p> </p>');
-  $typing.html('User is typing');
-  $typing.appendTo('#typing');
+  // $typing = $('<p> </p>');
+  // $typing.html('User is typing');
+  // $typing.appendTo('#typing');
+  var typingTimer;
+  var doneTypingInterval = 10;
+  var finaldoneTypingInterval = 500;
+
+  var oldData = $("p.typing").html();
+  $('#message_content_display').keydown(function() {
+    console.log('In keydown');
+    clearTimeout(typingTimer);
+    if ($('#message_content_display').val) {
+      typingTimer = setTimeout(function() {
+        $("p.typing").html('User is typing');
+        console.log('Someone typing');
+      }, doneTypingInterval);
+    }
+  });
+
+  $('#message_content_display').keyup(function() {
+    console.log('In keyup');
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(function() {
+      $("p.typing").html(oldData);
+      console.log('Someone stopped typing');
+    }, finaldoneTypingInterval);
+    console.log('User stopped typing');
+    $("p.typing").html('');
+  });
+
 };
+
 var ajaxRequest = function(req_content){
-  console.log('requesting ajax');
+  if(req_content.lat !== undefined){
+    message_content = JSON.stringify(req_content);
+  } else {
+    message_content = req_content;
+  }
   $.ajax({
         url: '/add_image_as_message',
         method: 'POST',
-        data: {content: req_content,
-          category: 'image' ,
-        group_id : window.location.pathname.split('/').pop()},
-        dataType: "json"
+        data: {
+          content: message_content,
+          group_id : window.location.pathname.split('/').pop()},
+          dataType: "json"
       })
       .done(function(data){
         console.log('success',data);
@@ -93,34 +132,34 @@ var shootVideo = function(){
     keepCameraOn: false
   },
   function(obj) {
-    // console.log(obj.image);
     if(!obj.error) {
       var image = obj.image;
       last_image = image;
-        //gifshot.stopVideoStreaming();
         $animatedImage = $('<img />');
         $animatedImage.attr('src',image);
         $animatedImage.addClass('message_images');
         showPreview($animatedImage);
+        $('#message_content_display').addClass('hidden');
+        $('#message_content').val('NTEXT'+last_image);
       }
     });
   };
 
 
 var clickImage = function(){
+  console.log('option image');
   gifshot.takeSnapShot(function(obj) {
-    // console.log(obj.image);
     if(!obj.error) {
         var image = obj.image;
         last_image = image;
         console.log('length of images',image.length);
-        //gifshot.stopVideoStreaming();
 
         $animatedImage = $('<img />');
         $animatedImage.attr('src',image);
         $animatedImage.addClass('message_images');
         showPreview($animatedImage);
-
+        $('#message_content_display').addClass('hidden');
+        $('#message_content').val('NTEXT'+image);
       }
     });
 
@@ -128,22 +167,27 @@ var clickImage = function(){
 $(document).ready(function(){
 
   $('.messagesendbutton').on('click',function(){
+    // emptyMessageField();
+    // clearPreview();
+  });
+  $('.messagediscardbutton').on('click',function(){
     emptyMessageField();
-  });
-
-  $('.say_yes').on('click',function(){
-    console.log('yes');
-    //calling ajax request to save the message after preview
-    ajaxRequest(last_image);
-
-  });
-
-  $('.say_no').on('click',function(){
-    console.log('no');
-    //calling ajax request to save the message after preview
-    console.log('Discarded');
     clearPreview();
   });
+
+  // $('.say_yes').on('click',function(){
+  //   console.log('yes');
+  //   //calling ajax request to save the message after preview
+  //   // ajaxRequest(last_image);
+  //
+  // });
+  //
+  // $('.say_no').on('click',function(){
+  //   console.log('no');
+  //   //calling ajax request to save the message after preview
+  //   // console.log('Discarded');
+  //   clearPreview();
+  // });
 
   $('#search').autocomplete({
     serviceUrl: '/incremental_user_search',
@@ -196,6 +240,10 @@ $(document).ready(function(){
     shootVideo();
   });
 
+  $('#message_content_display').on('keypress',function(){
+      // userTyping();
+
+  });
   // $('#message_content').on('keypress',function(){
   //   // cancelTimeout(typing_timeout);
   //   // typing_timeout = setTimeout(userNotTyping, 5000);
@@ -206,8 +254,56 @@ $(document).ready(function(){
   //
   // });
   $('.glyphicon-map-marker').on('click',function(){
-    console.log('location');
-    showPreview(geoLocation($(this)));
+    initMap();
+    $('.preview').removeClass('hidden');
+    $('#message_content_display').addClass('hidden');
+  });
+  $('#new_message')
+  .on("ajax:before",function(e,elements){
+    var msg_content = $('#message_content_display').val();
+    if (msg_content !== ''){
+      $('#message_content').val(msg_content);
+    }
+  })
+  .on("ajax:beforeSend",function(e,xhr,elements,settings){
+
+  })
+  .on("ajax:beforeSend",function(e,xhr,settings){
+
+  }).on("ajax:complete",function(e,status,xhr){
+    console.log('inside ajax complete');
+    emptyMessageField();
+    clearPreview();
+    $('#message_content_display').removeClass('hidden');
   });
 
+  // $('#new_message').on("ajax:success", (e, data, status, xhr){
+  //
+  // } ->
+  //   $("#new_article").append xhr.responseText
+  // );
+
 });
+
+// var createMap = function(id, location){
+//   console.log('raw',location);
+//   console.log('parsed',
+//   JSON.parse(location.replace(/&quot;/g,'"')));
+//   // return;
+//   // var $el = $('#' + id);
+//   var user_position = JSON.parse(location.replace(/&quot;/g,'"'));
+//   // console.log('element',$el);
+//   console.log('location from rails',user_position);
+//   var map = new google.maps.Map(document.getElementById(id), {
+//     center: user_position,
+//     scrollwheel: false,
+//     zoom: 16
+//   });
+//
+//   // Create a marker and set its position.
+//   var marker = new google.maps.Marker({
+//     map: map,
+//     position: user_position,
+//     title: 'address'
+//   });
+// };

@@ -10,14 +10,17 @@
   </head>
 
   <body>
+    <%# raise "hepl" %>
 
 <%# <!-- google map API key - AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc -->
 %>
 <!-- <script>var initMap = initMap || function () {}</script> -->
+<% if @current_user.present? %>
     <script>
       var app = app || {};
-      app.current_user = <%= @current_user.id if @current_user.present?%>;
+      app.current_user = <%= @current_user.id %>;
     </script>
+    <% end %>
     <div class="container">
       <%= render :partial => 'layouts/header_form' %>
       <%= yield %>

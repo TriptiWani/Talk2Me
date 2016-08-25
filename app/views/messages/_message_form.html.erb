@@ -1,34 +1,32 @@
+
+
 <%=form_for message, remote: true, authenticity_token: true do |f|%>
   <%= f.label :your_message%>:
-  <%= f.text_area :content, class: "form-control", data: {textarea: "message"}%>
-
+  <textarea class="form-control" data-textarea="message" name="message[content_display]" id="message_content_display"></textarea>
+  <%= f.hidden_field :content, class: "form-control", data: {textarea: "message"}%>
   <%= f.hidden_field :group_id, value: group.id %>
   <div id="typing">
-
-  </div>
-  <div class="chat_options">
-    <%= f.submit "Send", class: "btn btn-primary messagesendbutton",  data: {send: "message"}%>
-    <span class=" activate_camera glyphicon glyphicon-camera" aria-hidden="true"></span>
-    <span class=" activate_video glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
-    <%#= link_to '<span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>'.html_safe , users_path %>
-    <span class=" activate_location glyphicon glyphicon-map-marker" aria-hidden="true">
-      <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc&callback=initMap" async defer></script> -->
-    </span>
-    <%#= link_to '<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>'.html_safe , users_path %>
-    <!-- <button class="send_gif btn btn-primary"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span></button> -->
+    <p class="typing"></p>
   </div>
   <div class="preview hidden">
     <div class="preview_left">
     </div>
-    <div class="preview_right">
+    <!-- <div class="preview_right">
       <div class="say_yes">
         <span class="glyphicon  glyphicon glyphicon-ok" aria-hidden="true"></span>
       </div>
       <div class="say_no">
         <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
       </div>
-    </div>
+    </div> -->
+  </div>
+  <div class="chat_options">
+    <%= f.submit "Send", class: "btn btn-primary messagesendbutton",  data: {send: "message"}%>
+    <!-- <div class="messagediscardbutton">Disss</div> -->
+    <button class="btn btn-primary messagediscardbutton">Discard</button>
+    <span class=" activate_camera glyphicon glyphicon-camera" aria-hidden="true"></span>
+    <span class=" activate_video glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
+    <span class=" activate_location glyphicon glyphicon-map-marker" aria-hidden="true">
+    </span>
   </div>
 <%end%>
-
-<!-- glyphicon glyphicon-send -->

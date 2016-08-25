@@ -3,7 +3,11 @@ module MessagesHelper
   def check_msg_type(message)
     image_types = ['jpg','jpeg','png','gif']
     message_type = ''
-    if message =~ URI::regexp
+
+    if message =~ /^{.*:(\-?\d*\.?\d*).*:(\-?\d*\.?\d*)}/
+      p "its location"
+      message_type = 'location'
+    elsif message =~ URI::regexp
       message_last = message.split('.').last
       if (image_types.include?message_last)
             p "its image"

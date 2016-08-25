@@ -2,10 +2,12 @@
 
 }
 
-p.current_user {
+p.current_user,div.current_user {
     text-align: right;
 }
-
+div.display_map,p.display_map {
+  display: inline-block;
+}
 .group_header_left {
   width: 20%;
   display: inline-block;
@@ -125,10 +127,16 @@ div.controls{
   border-radius: 1em;
   border: 1px solid black;
 }
-
+.messagediscardbutton{
+  margin-left: 20px;
+}
 .map{
   width: 100%;
   height: 250px;
+}
+.message_maps{
+  width: 200px;
+  height: 200px;
 }
 .activate_camera , .activate_video , .activate_location {
   padding:1em;
