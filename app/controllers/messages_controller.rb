@@ -25,7 +25,6 @@
       message = Message.new(message_params)
       if ((params[:message][:content] =~ /^NLOC({.*:(\-?\d*\.?\d*).*:(\-?\d*\.?\d*)})/).eql?0)
         message_latitude_longitude = $1
-        binding.pry
         # location_url = "http://maps.google.com/maps/api/staticmap?size=200x200&sensor=false&zoom=16&markers=#{message_latitude}%2C#{message_longitude}"
         # req = Cloudinary::Uploader.upload(location_url)
         # message.content = req["url"]
