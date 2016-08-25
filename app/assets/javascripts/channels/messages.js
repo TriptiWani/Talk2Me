@@ -19,41 +19,41 @@ App.messages = App.cable.subscriptions.create('MessagesChannel', {
 
       } else if  (data.message.match( /^\{.*\}$/ )){
         console.log('messages',data);
-        if (data.id === app.current_user ){
-          $div = $('<div></div>');
-          $div.addClass('current_user message_location');
-          $div_map = $('<div> </div>');
-          $div_map.addClass('message_images display_map message_maps time');
-          $div.attr('id','map-' + data.message_id);
-          $p_time = $('<p></p>');
-          $p_time.addClass('time');
-          $p_time.val(time);
-          $p_name = $('<p></p>');
-          $p_name.addClass('display_map');
+        $div_main = $('<div></div>');
+        $div_main.addClass('current_user message_location');
+
+        $p_time = $('<p></p>');
+        $p_time.addClass('time');
+        $p_time.text(time);
+
+        $div_map = $('<div> </div>');
+        $div_map.attr('id','map-' + data.message_id);
+        $div_map.addClass('message_images display_map message_maps time');
+
+        $p_name = $('<p></p>');
+        $p_name.addClass('display_map');
+
           $strong = $('<strong></strong');
-          $strong.val(':'+data.user);
-          $p_name.append($strong);
-          $div.append($p_time);
-          $div.append($div_map);
-          $div.append($p_name);
 
-          var myLatLng= JSON.parse(data.message);
-          var map = new google.maps.Map(document.getElementById('map-'+data.message_id), {
-            center: myLatLng,
-            scrollwheel: false,
-            zoom: 16
-          });
+        $strong.appendTo($p_name);
+        if (data.id === app.current_user ){
+          $strong.text(':'+data.user);
+          $div_main.append($p_time);
+          $div_main.append($div_map);
+          $div_main.append($p_name);
 
-          // Create a marker and set its position.
-          var marker = new google.maps.Marker({
-            map: map,
-            position: myLatLng,
-            title: 'address'
-          });
-
-          return ("<div class='current_user message_location'><p class='time'>"+ time +"</p><div id='map-" + data.message_id + "' class='message_images display_map message_maps time'></div><p class='display_map'><strong>:" + data.user + "</strong></p></div>");
+          $('#messages').append($div_main);
+          displayLocation(data.message, data.message_id);
         } else {
-          return '<p class="time">' + time + '</p><p><b>'+ data.user + ':</b> <img src="' + data.message +'"></p>';
+          $strong.text(data.user+':');
+          $div_main.append($p_time);
+          $div_main.append($p_name);
+          $div_main.append($div_map);
+          $div_main.removeClass('current_user');
+
+          $('#messages').append($div_main);
+          displayLocation(data.message, data.message_id);
+          // return '<p class="time">' + time + '</p><p><b>'+ data.user + ':</b> <img src="' + data.message +'"></p>';
         }
 
         console.log('map','map-'+data.message_id  );

@@ -149,6 +149,19 @@ var shootVideo = function(){
 var clickImage = function(){
   console.log('option image');
   gifshot.takeSnapShot(function(obj) {
+    // console.log(delay);
+    // setTimeout(if(!obj.error) {
+    //     var image = obj.image;
+    //     last_image = image;
+    //     console.log('length of images',image.length);
+    //
+    //     $animatedImage = $('<img />');
+    //     $animatedImage.attr('src',image);
+    //     $animatedImage.addClass('message_images');
+    //     showPreview($animatedImage);
+    //     $('#message_content_display').addClass('hidden');
+    //     $('#message_content').val('NTEXT'+image);
+    //   },100);
     if(!obj.error) {
         var image = obj.image;
         last_image = image;

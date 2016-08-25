@@ -1,18 +1,35 @@
 <div id="header">
     <div class="col-xs-12">
-      <div class="title">
-        <h2>Talk2Me</h2>
-      </div>
-      <div class="controls row">
-        <% if @current_user.present? %>
-        <%= link_to 'New Group' , new_group_path %>
-        <%#= link_to 'My Groups',groups_path %>
-          <%= link_to  'Log Out' , login_path ,:method => 'delete'%>
-        <% else %>
-          <%= link_to  'Sign Up' , new_user_path %>
-          <%= link_to  'Log In' , login_path %>
-        <% end %>
-    </div>
+        <div class="header_left col-xs-3 col-xs-offset-1">
+          <%# if @current_user.present? %>
+            <%=  link_to (image_tag 't2m.png' ,:class => 'logo') , root_path %>
+          <%# end %>
+        </div>
+        <div class="header_right col-xs-6 col-xs-offset-1">
+          <div class="header_right_top">
+            <p class="greetings">
+              <% if @current_user.present? %>
+                  Hello <%= @current_user.name %>!
+              <% else %>
+                Welcome to Talk2Me!
+              <% end %>
+              </p>
+          </div>
+          <div class="header_right_bottom">
+            <% if @current_user.present? %>
+              <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">  <%= link_to  'New Group' , new_group_path %></button>
+                <button type="button" class="btn btn-default">  <%= link_to  'Log Out' , login_path ,:method => 'delete'%></button>
+              </div>
+            <% else %>
+              <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default"><%= link_to 'Sign Up' ,new_user_path %></button>
+                <button type="button" class="btn btn-default"><%= link_to 'Log In' ,login_path %></button>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
   </div>
   <div id="flashnotice">
     <% if flash[:notice] %>
