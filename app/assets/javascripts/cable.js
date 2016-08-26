@@ -11,8 +11,3 @@
   App.cable = ActionCable.createConsumer();
 
 }).call(this);
-
-
-
-// 
-// App.cable = Cable.createConsumer("<%= Rails.application.config.web_socket_server_url %>");

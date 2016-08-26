@@ -1,32 +1,45 @@
-<%= form_for @group,:html => {:multipart => true}  do |f| %>
-        <fieldset>
-            <%= f.label :GroupName %>
-            <%= f.text_field :grp_name %>
-        </fieldset>
-        <fieldset>
-            <%= f.label :GroupImage %>
-            <%= cl_image_upload_tag :grp_image %>
-        </fieldset>
+<% if @group.errors.any? %>
+  <ol>
+    <% @group.errors.full_messages.each do |message| %>
+      <li class="error_message"><%= message %></li>
+    <% end %>
+  </ol>
+<% end %>
 
-        <div class="grp_members">
-            <label for="users">Members:</label>
-            <ul class="group_members_list">
-              <% @group.users.each do |contact| %>
-                <li>
-                  <p>
-                    <% group_member_name = contact.name %>
-                  </p>
-                  <% if (contact.id).eql?(@group.grp_admin_id) %>
-                    <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
-                    <%= link_to group_member_name , contact, :class => 'glyphicon glyphicon-king' %>
-                  <% else %>
-                    <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
-                    <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
-                    <%#= link_to  '<span class="glyphicon glyphicon glyphicon-scissors" aria-hidden="true"></span>'.html_safe, removeusersfromgroup_path(@group,contact)  ,:method => post%>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-        </div>
-        <%= f.submit %>
+<%= form_for @group,:html => {:multipart => true}  do |f| %>
+  <fieldset>
+    <%= f.label :GroupName%>
+    <%= f.text_field :grp_name %>
+  </fieldset>
+  <fieldset>
+    <div class="user_image_field">
+      <%= f.label :GroupImage %>
+      <%= cl_image_upload_tag :grp_image  %>
+    </div>
+
+  </fieldset>
+  <% if  @group.users.present?%>
+    <div class="grp_members">
+      <label for="users">Members:</label>
+      <p><%= pluralize(@group.users.count,'member') %> </p>
+      <ul class="group_members_list">
+        <% @group.users.each do |contact| %>
+          <li>
+            <p>
+              <% group_member_name = contact.name %>
+            </p>
+            <% if (contact.id).eql?(@group.grp_admin_id) %>
+              <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
+              <%= link_to group_member_name , contact, :class => 'glyphicon glyphicon-king' %>
+            <% else %>
+              <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
+              <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
+              <%= link_to  '<span class="glyphicon glyphicon glyphicon-scissors" aria-hidden="true"></span>'.html_safe, removeusersfromgroup_path(@group,contact)  %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.submit 'Create Group', class: "btn btn-primary col-xs-offset-2 col-md-offset-2"%>
 <% end %>

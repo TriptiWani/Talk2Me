@@ -4,7 +4,8 @@
   margin: 1em;
   padding-top:1em;
   color: #8c407e;
-  min-height: 98vh;
+  min-height: 95vh;
+  max-width: 98vw;
 }
 .group_body {
   margin-bottom: 1em;
@@ -12,12 +13,9 @@
 .header_left,.header_right {
   display:inline-block;
 }
-/*.header_left {
-  width:20%;
+.grp_members{
+  padding-top: 1em;
 }
-.header_right{
-  width:75%
-}*/
 .header_right_top,.header_right_bottom {
   display:block;
 }
@@ -27,16 +25,52 @@
   border-radius: 50%;
 }
 .greetings {
-  /*width: 90%;*/
   font-size: 20px;
 }
 .user_greetings {
   width:90%;
   height:70px;
 }
-
 .home_page_logo {
-  /*//blink  */
+    height: 200px;
+    width: 200px;
+    -webkit-transition-property: height, width;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: height, width;
+    -moz-transition-duration: 1s;
+    transition-property: height, width;
+    transition-duration: 1s;
+}
+.home_page_logo{
+  padding-top: 10em;
+  animation: size-animation 1s steps(5, start) infinite;
+ -webkit-animation: size-animation 1s steps(5, start) infinite;
+}
+@keyframes size-animation {
+ to {
+   width: 300px;
+   height: 300px;
+ }
+}
+@-webkit-keyframes size-animation {
+ to {
+   width: 300px;
+   height: 300px;
+ }
+}
+.error_message{
+  animation: blink-animation 1s steps(5, start) infinite;
+ -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+ to {
+   visibility: hidden;
+ }
+}
+@-webkit-keyframes blink-animation {
+ to {
+   visibility: hidden;
+ }
 }
 p.current_user,div.current_user {
     text-align: right;
@@ -113,14 +147,12 @@ div.display_map,p.display_map {
 }
 .edit_user_top, .edit_user_bottom{
   margin: 2em;
-  /*border: 1px solid #8c407e;*/
   margin: 0.5em;
   padding: 0.5em;
 }
 .edit_user_top_left{
   display: inline-block;
   width: 35%;
-  /*border: 1px solid #8c407e;*/
   margin: 0.5em;
   padding: 0.5em;
 }
@@ -134,7 +166,6 @@ div.display_map,p.display_map {
   display: inline-block;
   width:55%;
   font-size: 40px;
-  /*border: 1px solid #8c407e;*/
   margin: 0.5em;
   padding: 0.5em;
 }
@@ -151,6 +182,13 @@ div.controls{
 }
 .controls > a{
   text-align: right;
+}
+#footer{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
 }
 .footer_options{
   border-color: #8c407e;
@@ -206,7 +244,6 @@ div.controls{
   width:90%;
   height: 300px;
   border: 1px solid #8c407e;
-  /*padding:0.5em;*/
   margin:1em;
 }
 .preview_left,.preview_right{
@@ -241,15 +278,27 @@ div.controls{
   text-align: center;
   border-radius: 1em;
 }
-a:hover,input[type="submit"]:hover,.messagesendbutton:hover, .messagediscardbutton:hover {
-    color:#8c407e;
+.btn-primary{
+  margin-top: 1em;
 }
+.add_user {
+  text-align:center;
+}
+a:hover,input[type="submit"]:hover,.messagesendbutton:hover,.messagesendbutton:focus, .messagediscardbutton:hover , .messagediscardbutton:focus,.messagesendbutton.disabled:hover,.messagediscardbutton.disabled:hover,.btn-primary:hover , .btn-primary,.btn-primary:focus{
+    color:#8c407e;
+    background-color: #8c407e !important;
+    color:#fff;
+}
+
+.listing_members > a{
+  display:inline-block;
+}
+
 input[type="submit"]{
   margin: 5px;
 }
 .navbar-inverse{
   background-color: #8c407e;
-  /*margin: 1em;*/
 }
 a{
   color: #8c407e;

@@ -1,25 +1,33 @@
+<% if @user.errors.any? %>
+  <ol>
+    <% @user.errors.full_messages.each do |message| %>
+      <li class="error_message"><%= message %></li>
+    <% end %>
+  </ol>
+<% end %>
+
 <%= form_for @user,:html => {:multipart => true}  do |f| %>
-        <fieldset>
-            <%= f.label :name %>
-            <%= f.text_field :name %>
-        </fieldset>
-        <fieldset>
-            <%= f.label :email_id %>
-            <%= f.text_field :email_id %>
-        </fieldset>
-        <fieldset>
-            <%= f.label :password %>
-            <%= f.password_field :password %>
-        </fieldset>
-        <fieldset>
-            <%= f.label :confirm_Password %>
-            <%= f.password_field :password_confirmation %>
-        </fieldset>
-        <fieldset>
-          <div class="user_image_field">
-            <%= f.label :image %>
-            <%= cl_image_upload_tag :image %>
-          </div>
-        </fieldset>
-        <%= f.submit %>
+  <fieldset>
+      <%= f.label :name,:class=> "col-xs-2 col-xs-offset-2 col-md-3" %>
+      <%= f.text_field :name ,:class=> "col-xs-4  col-md-4 col-md-offset-2" %>
+  </fieldset>
+  <fieldset>
+      <%= f.label :email_id ,:class=> "col-xs-2 col-xs-offset-2 col-md-3"%>
+      <%= f.text_field :email_id ,:class=> "col-xs-4  col-md-4 col-md-offset-2"%>
+  </fieldset>
+  <fieldset>
+      <%= f.label :password,:class=> "col-xs-2 col-xs-offset-2 col-md-3" %>
+      <%= f.password_field :password ,:class=> "col-xs-4  col-md-4 col-md-offset-2"%>
+  </fieldset>
+  <fieldset>
+      <%= f.label :confirm_Password,:class=> "col-xs-2 col-xs-offset-2 col-md-3" %>
+      <%= f.password_field :password_confirmation ,:class=> "col-xs-4  col-md-4 col-md-offset-2"%>
+  </fieldset>
+  <fieldset>
+    <div class="user_image_field">
+      <%= f.label :image ,:class=> "col-xs-2 col-xs-offset-2 col-md-3"%>
+      <%= cl_image_upload_tag :image ,:class=> "col-xs-4  col-md-4 col-md-offset-2" %>
+    </div>
+  </fieldset>
+  <%= f.submit 'Create User',:class=> "col-xs-3 col-xs-offset-7 col-md-3 col-md-offset-6 btn btn-primary loginBtn" %>
 <% end %>

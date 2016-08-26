@@ -1,24 +1,49 @@
-# README
+# **Talk2Me**
+We all love to share our thoughts,photos,locations,etc. with our friends..So here it is!!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is my Final Project on web-based group chat application **Inventory Management** as part of my Web Development Immersive 15 with General Assembly.
 
-Things you may want to cover:
+## Duration:
+A week
 
-* Ruby version
+## Tech Stack:
+- HTML
+- JavaScript
+- CSS
+- jQuery
+- Ruby
+- Rails 5
+- Cloudinary
+- BootStrap
+- bcrypt
+- httparty
+- Heroku
+- Gifshot.js
+- GoogleMaps.js
+- jQueryAutoComplete.js
 
-* System dependencies
+## Features:
 
-* Configuration
+#### #Sign Up as a new user
+##### Create a new group, add existing app users as members to the group
+##### Access related - adding members, editing the group
+##### Share your photos, gifs, location along with the normal text chat feature
+##### Once the order is placed, admin can either Approve or Reject the order.
+##### The quantity in the warehouse is updated after 'approving' the order.
+##### Delete the existing user/group, if user wishes to:
+This will just inactivate the account, so that a group/user can come to life again easily!
 
-* Database creation
 
-* Database initialization
+## Nice to have:
+Below listed are the features I would like to implement further to this:
+- Chats between two users only
+- Display status for each user
+- Camera preview for photos,gifs
+- Detect when the user is typing
+- Password reset via mailer
+- Code refactoring: The code looks bulky. Could be improved
 
-* How to run the test suite
+## Link:
+ [Talk2Me](https://talk2meapp.herokuapp.com/)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Thanks for stopping by, and I hope you enjoying this app!

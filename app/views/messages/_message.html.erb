@@ -1,46 +1,14 @@
-<%# raise "help" %>
-
 <% message_type = check_msg_type(message.content) %>
 <% if (message.user).eql?(@current_user) %>
   <% if message_type.eql?'image' %>
     <p class="current_user time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M") %></p><p class="current_user"><%= cl_image_tag message.content ,:class=> "message_images"%>:<strong class="message"><%=message.user.name%></strong></p>
   <% elsif message_type.eql?'location' %>
-  <div class="current_user message_location">
-    <p class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p>
-    <div id="map-<%= message.id %>" class="message_images display_map message_maps time"></div>
-    <p class="display_map"><strong>:<%=message.user.name%></strong></p>
-  </div>
-    <script>
-    var content = ('<%= message.content %>').replace(/&quot;/g,'"');
-    var myLatLng= JSON.parse(content);
-    var map = new google.maps.Map(document.getElementById('map-'+<%= message.id %>), {
-      center: myLatLng,
-      scrollwheel: false,
-      zoom: 16
-    });
-
-    // Create a marker and set its position.
-    var marker = new google.maps.Marker({
-      map: map,
-      position: myLatLng,
-      title: 'address'
-    });
-    </script>
-  <% elsif message_type.eql?'link' %>
-    <p class="current_user time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p class="current_user"><%= link_to  message.content, message.content %>:<strong class="message"><%=message.user.name%></strong></p>
-  <% else %>
-    <p class="current_user time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p class="current_user"><%=message.content%>:<strong class="message"><%=message.user.name%></strong></p>
-  <% end %>
-
-<% else %>
-  <% if message_type.eql?'image' %>
-    <p class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p><strong><%=message.user.name%>:</strong> <%= cl_image_tag message.content ,:class=> "message_images"%></p>
-  <% elsif message_type.eql?'location' %>
-    <div class="message_location">
+    <div class="current_user message_location">
       <p class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p>
-      <p class="display_map"><strong><%=message.user.name%>:</strong></p>
       <div id="map-<%= message.id %>" class="message_images display_map message_maps time"></div>
-      <script>
+      <p class="display_map"><strong>:<%=message.user.name%></strong></p>
+    </div>
+    <script>
       var content = ('<%= message.content %>').replace(/&quot;/g,'"');
       var myLatLng= JSON.parse(content);
       var map = new google.maps.Map(document.getElementById('map-'+<%= message.id %>), {
@@ -55,13 +23,42 @@
         position: myLatLng,
         title: 'address'
       });
+    </script>
+  <% elsif message_type.eql?'link' %>
+    <p class="current_user time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p class="current_user"><%= link_to  message.content, message.content %>:<strong class="message"><%=message.user.name%></strong></p>
+  <% else %>
+    <p class="current_user time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p class="current_user"><%=message.content%>:<strong class="message"><%=message.user.name%></strong></p>
+  <% end %>
+<% else %>
+  <% if message_type.eql?'image' %>
+    <p class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p><strong><%=message.user.name%>:</strong> <%= cl_image_tag message.content ,:class=> "message_images"%></p>
+  <% elsif message_type.eql?'location' %>
+    <div class="message_location">
+      <p class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p>
+      <p class="display_map"><strong><%=message.user.name%>:</strong></p>
+      <div id="map-<%= message.id %>" class="message_images display_map message_maps time"></div>
+      <script>
+        var content = ('<%= message.content %>').replace(/&quot;/g,'"');
+        var myLatLng= JSON.parse(content);
+        var map = new google.maps.Map(document.getElementById('map-'+<%= message.id %>), {
+          center: myLatLng,
+          scrollwheel: false,
+          zoom: 16
+        });
+
+        // Create a marker and set its position.
+        var marker = new google.maps.Marker({
+          map: map,
+          position: myLatLng,
+          title: 'address'
+        });
       </script>
     </div>
 
   <% elsif message_type.eql?'link' %>
     <p class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p><strong><%=message.user.name%>:</strong>
-    <%= link_to  message.content, message.content %>
-  </p>
+      <%= link_to  message.content, message.content %>
+    </p>
   <% else %>
     <p  class="time"><%= message.created_at.localtime.strftime("%d-%m-%Y %H:%M")  %></p><p><strong><%=message.user.name%>:</strong> <%=message.content%></p>
   <% end %>

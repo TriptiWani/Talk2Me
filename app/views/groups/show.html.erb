@@ -1,12 +1,12 @@
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc">
+
+</script>
 <div class="groupview">
   <div class="group_header">
     <div class="group_header_left col-xs-2">
-      <%#= cl_image_tag @group.grp_image %>
     </div>
     <div class="group_header_right col-xs-8 col-xs-offset-1">
       <div class="group_name">
-        <%#= @group.grp_name %>
       </div>
       <div class="add_contact">
       </div>
@@ -25,6 +25,7 @@
         </div>
         <div class="group_body_left_top_1">
           <%= link_to "Edit Group", edit_group_path(@group),:class => 'glyphicon glyphicon-pencil' %>
+          <%= link_to "Delete Group", group_path(@group),:class => 'glyphicon glyphicon-trash',:method => 'delete', :data => {:confirm => "Are you sure"} %>
         </div>
         <div class="group_body_left_top_2">
           <label class="glyphicon glyphicon-plus" for="usersearch">Add User</label>
@@ -33,20 +34,19 @@
       </div>
       <div class="group_body_left_bottom">
         <label for="users">Members:</label>
+        <p><%= pluralize(@group.users.count,'member') %> </p>
         <ul class="group_members_list">
           <% @group.users.each do |contact| %>
-            <li>
-              <p>
+            <li class="listing_members">
                 <% group_member_name = contact.name %>
-              </p>
-              <% if (contact.id).eql?(@group.grp_admin_id) %>
-                <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
-                <%= link_to group_member_name , contact, :class => 'glyphicon glyphicon-king' %>
-              <% else %>
-                <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
-                <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
-                <%#= link_to  '<span class="glyphicon glyphicon glyphicon-scissors" aria-hidden="true"></span>'.html_safe, removeusersfromgroup_path(@group,contact) ,:method => post  %>
-              <% end %>
+                <% if (contact.id).eql?(@group.grp_admin_id) %>
+                  <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
+                  <%= link_to group_member_name , contact, :class => 'glyphicon glyphicon-king' %>
+                <% else %>
+                  <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
+                  <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
+                  <%= link_to  '<span class="glyphicon glyphicon glyphicon-scissors" aria-hidden="true"></span>'.html_safe, removeusersfromgroup_path(@group,contact)  %>
+                <% end %>
             </li>
           <% end %>
         </ul>
@@ -69,8 +69,7 @@
           </div>
         <%end%>
       </div>
-
-        <%= render partial: 'messages/message_form', locals: {message: @message, group: @group}%>
+      <%= render partial: 'messages/message_form', locals: {message: @message, group: @group}%>
     </div>
   </div>
 </div>

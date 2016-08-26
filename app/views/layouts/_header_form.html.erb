@@ -1,36 +1,35 @@
 <div id="header">
-    <div class="col-xs-12">
-        <div class="header_left col-xs-3 col-xs-offset-1">
-          <%# if @current_user.present? %>
-            <%=  link_to (image_tag 't2m.png' ,:class => 'logo') , root_path %>
-          <%# end %>
-        </div>
-        <div class="header_right col-xs-6 col-xs-offset-1">
-          <div class="header_right_top">
-            <p class="greetings">
-              <% if @current_user.present? %>
-                  Hello <%= @current_user.name %>!
-              <% else %>
-                Welcome to Talk2Me!
-              <% end %>
-              </p>
-          </div>
-          <div class="header_right_bottom">
+  <div class="col-xs-12">
+      <div class="header_left col-xs-3 col-xs-offset-1">
+        <% if @current_user.present? %>
+          <%=  link_to (image_tag 't2m.png' ,:class => 'logo') , root_path %>
+        <% end %>
+      </div>
+      <div class="header_right col-xs-6 col-xs-offset-1">
+        <div class="header_right_top">
+          <p class="greetings">
             <% if @current_user.present? %>
-              <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default">  <%= link_to  'My Groups' , groups_path %></button>
-                <button type="button" class="btn btn-default">  <%= link_to  'New Group' , new_group_path %></button>
-                <button type="button" class="btn btn-default">  <%= link_to  'Log Out' , login_path ,:method => 'delete'%></button>
-              </div>
+                Hello <%= @current_user.name %>!
             <% else %>
-              <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default"><%= link_to 'Sign Up' ,new_user_path %></button>
-                <button type="button" class="btn btn-default"><%= link_to 'Log In' ,login_path %></button>
-              </div>
+              Welcome to Talk2Me!
             <% end %>
-
-          </div>
+          </p>
         </div>
+        <div class="header_right_bottom">
+          <% if @current_user.present? %>
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default">  <%= link_to  'My Groups' , groups_path %></button>
+              <button type="button" class="btn btn-default">  <%= link_to  'New Group' , new_group_path %></button>
+              <button type="button" class="btn btn-default">  <%= link_to  'Log Out' , login_path ,:method => 'delete'%></button>
+            </div>
+          <% else %>
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default"><%= link_to 'Sign Up' ,new_user_path %></button>
+              <button type="button" class="btn btn-default"><%= link_to 'Log In' ,login_path %></button>
+            </div>
+          <% end %>
+        </div>
+      </div>
   </div>
   <div id="flashnotice">
     <% if flash[:notice] %>

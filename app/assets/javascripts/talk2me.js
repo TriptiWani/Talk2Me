@@ -15,14 +15,15 @@ var displayLocation = function(coord,id) {
     title: 'address'
   });
 };
-// var typing_timeout = undefined;
 var showPreview = function($el){
-  console.log('showing');
+  // debug
+  //console.log('showing');
   $el.appendTo('.preview_left');
   $('.preview').removeClass('hidden');
 };
 var clearPreview = function(){
-  console.log('clearing');
+  // debug
+  //console.log('clearing');
   $('.preview_left').html('');
   $('.preview').addClass('hidden');
 };
@@ -45,7 +46,8 @@ function initMap() {
        lng: lon
     };
     last_image = myLatLng;
-    console.log('location from iinside',last_image);
+    // debug
+    //console.log('location from iinside',last_image);
     $('#message_content').val('NLOC'+JSON.stringify(last_image));
     var map = new google.maps.Map(document.getElementById('map'), {
       center: myLatLng,
@@ -71,33 +73,35 @@ var emptyMessageField = function(){
 };
 
 var userTyping = function(){
-  // $typing = $('<p> </p>');
-  // $typing.html('User is typing');
-  // $typing.appendTo('#typing');
   var typingTimer;
   var doneTypingInterval = 10;
   var finaldoneTypingInterval = 500;
 
   var oldData = $("p.typing").html();
   $('#message_content_display').keydown(function() {
-    console.log('In keydown');
+    // debug
+    //console.log('In keydown');
     clearTimeout(typingTimer);
     if ($('#message_content_display').val) {
       typingTimer = setTimeout(function() {
         $("p.typing").html('User is typing');
-        console.log('Someone typing');
+        // debug
+        //console.log('Someone typing');
       }, doneTypingInterval);
     }
   });
 
   $('#message_content_display').keyup(function() {
-    console.log('In keyup');
+    // debug
+    //console.log('In keyup');
     clearTimeout(typingTimer);
     typingTimer = setTimeout(function() {
       $("p.typing").html(oldData);
-      console.log('Someone stopped typing');
+      // debug
+      //console.log('Someone stopped typing');
     }, finaldoneTypingInterval);
-    console.log('User stopped typing');
+    // debug
+    //console.log('User stopped typing');
     $("p.typing").html('');
   });
 
@@ -118,11 +122,13 @@ var ajaxRequest = function(req_content){
           dataType: "json"
       })
       .done(function(data){
-        console.log('success',data);
+        // debug
+        //console.log('success',data);
         clearPreview();
       })
       .fail(function(data){
-        console.log('fail',data);
+        // debug
+        //console.log('fail',data);
         clearPreview();
       });
 };
@@ -132,29 +138,32 @@ var shootVideo = function(){
     keepCameraOn: false
   },
   function(obj) {
-    if(!obj.error) {
-      var image = obj.image;
-      last_image = image;
-        $animatedImage = $('<img />');
-        $animatedImage.attr('src',image);
-        $animatedImage.addClass('message_images');
-        showPreview($animatedImage);
-        $('#message_content_display').addClass('hidden');
-        $('#message_content').val('NTEXT'+last_image);
-      }
+    setTimeout( function(){
+      if(!obj.error) {
+        var image = obj.image;
+        last_image = image;
+          $animatedImage = $('<img />');
+          $animatedImage.attr('src',image);
+          $animatedImage.addClass('message_images');
+          showPreview($animatedImage);
+          $('#message_content_display').addClass('hidden');
+          $('#message_content').val('NTEXT'+last_image);
+        }
+    },1000);
     });
   };
 
 
 var clickImage = function(){
-  console.log('option image');
+  // debug
+  //console.log('option image');
   gifshot.takeSnapShot( function(obj){
     setTimeout(function(  ) {
-    // console.log(delay);
         if(!obj.error) {
         var image = obj.image;
         last_image = image;
-        console.log('length of images',image.length);
+        // debug
+        //console.log('length of images',image.length);
 
         $animatedImage = $('<img />');
         $animatedImage.attr('src',image);
@@ -165,48 +174,21 @@ var clickImage = function(){
       }
     },1000);
   });
-
-
-    //
-    // if(!obj.error) {
-    //     var image = obj.image;
-    //     last_image = image;
-    //     console.log('length of images',image.length);
-    //
-    //     $animatedImage = $('<img />');
-    //     $animatedImage.attr('src',image);
-    //     $animatedImage.addClass('message_images');
-    //     showPreview($animatedImage);
-    //     $('#message_content_display').addClass('hidden');
-    //     $('#message_content').val('NTEXT'+image);
-    //   }
-    // });
-
 };
 $(document).ready(function(){
 
-  $('.messagesendbutton').on('click',function(){
+  $('.messagesendbutton').on('click',function(e){
+    //to be included in next version
     // emptyMessageField();
     // clearPreview();
+    // function scrollToBottom(e) {
+//  e.scrollTop = e.scrollHeight - e.getBoundingClientRect().height;
+    //  }
   });
   $('.messagediscardbutton').on('click',function(){
     emptyMessageField();
     clearPreview();
   });
-
-  // $('.say_yes').on('click',function(){
-  //   console.log('yes');
-  //   //calling ajax request to save the message after preview
-  //   // ajaxRequest(last_image);
-  //
-  // });
-  //
-  // $('.say_no').on('click',function(){
-  //   console.log('no');
-  //   //calling ajax request to save the message after preview
-  //   // console.log('Discarded');
-  //   clearPreview();
-  // });
 
   $('#search').autocomplete({
     serviceUrl: '/incremental_user_search',
@@ -222,40 +204,72 @@ $(document).ready(function(){
             dataType: "json"
           })
           .done(function(data){
-            console.log(data);
-            $new_member = $('<li />');
+            $('#search').val('');
+            // debug
+            //console.log(data.responseText);
+            if (data.responseText === 'Contact is already added') {
+              alert('Contact already present');
+            } else {
+              $new_member = $('<li />');
 
-            $new_member_name = $('<a />');
-            $new_member_name.addClass('glyphicon glyphicon-pawn');
-            $new_member_name.attr('href','/users/'+ data['id'] );
-            $new_member_name.html(data['name']);
+              $new_member_name = $('<a />');
+              $new_member_name.addClass('glyphicon glyphicon-pawn');
+              $new_member_name.attr('href','/users/'+ data['id'] );
+              $new_member_name.html(data['name']);
 
-            $img = $('<img />');
-            $img.attr('src', data['image']);
-            $img.addClass('user_image');
+              $remove_user = $('<a />');
+              $remove_user.attr('href','/group/'+ window.location.pathname.split('/').pop() + '/user/'+ data['id'] );
+              $remove_span = $('<span></span>');
+              $remove_span.addClass("glyphicon glyphicon glyphicon-scissors");
+              $remove_span.attr('aria-hidden',"true");
+              $remove_span.appendTo($remove_user);
 
-            $new_member_image = $('<a />');
-            $new_member_image.attr('href','/users/'+ data['id']);
-            $new_member_image.html($img);
 
-            $new_member_image.appendTo($new_member);
-            $new_member_name.appendTo($new_member);
+              $img = $('<img />');
+              $img.attr('src', data['image']);
+              $img.addClass('user_image');
 
-            $new_member.appendTo('.group_members_list');
+              $new_member_image = $('<a />');
+              $new_member_image.attr('href','/users/'+ data['id']);
+              $new_member_image.html($img);
+
+              $new_member_image.appendTo($new_member);
+              $new_member_name.appendTo($new_member);
+              $remove_user.appendTo($new_member);
+
+              $new_member.appendTo('.group_members_list');
+            }
+            // debug
+            //console.log(data);
+
+
           })
           .fail(function(data){
-            alert('Unable to add user to the group. Try again after sometime');
-            console.log('fail',data);
+            $('#search').val('');
+            // debug
+            //console.log(data.responseText);
+            if (data.responseText === 'Contact is already added'){
+              // debug
+              //console.log('FAILLL');
+              alert('Contact already present');
+            } else{
+              alert('Unable to add user to the group. Try again after sometime');
+            }
+            $('#search').html('');
+            // debug
+            //console.log('fail',data);
           });
     }
   });
   $('.activate_camera').on('click',function(){
-    console.log('camera');
+    // debug
+    //console.log('camera');
     clickImage();
   });
 
   $('.activate_video').on('click',function(){
-    console.log('video');
+    // debug
+    //console.log('video');
     shootVideo();
   });
 
@@ -263,13 +277,15 @@ $(document).ready(function(){
       // userTyping();
 
   });
+  //Tobe included in next version
   // $('#message_content').on('keypress',function(){
   //   // cancelTimeout(typing_timeout);
   //   // typing_timeout = setTimeout(userNotTyping, 5000);
   //   // if(more than 5 seconds) {
   //   //   userTyping();
   //   // }
-  //   console.log('Someone typing');
+  //   // debug
+  //console.log('Someone typing');
   //
   // });
   $('.glyphicon-map-marker').on('click',function(){
@@ -290,39 +306,10 @@ $(document).ready(function(){
   .on("ajax:beforeSend",function(e,xhr,settings){
 
   }).on("ajax:complete",function(e,status,xhr){
-    console.log('inside ajax complete');
+    // debug
+    //console.log('inside ajax complete');
     emptyMessageField();
     clearPreview();
     $('#message_content_display').removeClass('hidden');
   });
-
-  // $('#new_message').on("ajax:success", (e, data, status, xhr){
-  //
-  // } ->
-  //   $("#new_article").append xhr.responseText
-  // );
-
 });
-
-// var createMap = function(id, location){
-//   console.log('raw',location);
-//   console.log('parsed',
-//   JSON.parse(location.replace(/&quot;/g,'"')));
-//   // return;
-//   // var $el = $('#' + id);
-//   var user_position = JSON.parse(location.replace(/&quot;/g,'"'));
-//   // console.log('element',$el);
-//   console.log('location from rails',user_position);
-//   var map = new google.maps.Map(document.getElementById(id), {
-//     center: user_position,
-//     scrollwheel: false,
-//     zoom: 16
-//   });
-//
-//   // Create a marker and set its position.
-//   var marker = new google.maps.Marker({
-//     map: map,
-//     position: user_position,
-//     title: 'address'
-//   });
-// };

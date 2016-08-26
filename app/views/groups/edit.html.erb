@@ -1,13 +1,16 @@
+<h1 class="add_user">Edit Group</h1>
 <div class="edit_group">
   <div class="edit_group_top">
     <div class="edit_group_top_left">
       <%= cl_image_tag @group.grp_image , :class => 'user_display_image' %>
     </div>
-    <div class="edit_group_top_right">
+    <div class="edit_group_top_right col-xs-4  col-md-4 ">
       <%= @group.grp_name %>
     </div>
   </div>
   <div class="edit_group_bottom">
-    <%= render :partial => 'group_form' %>
+    <div class="col-xs-6 col-xs-offset-3 col-md-6 col-md-offset-3">
+      <%= render :partial => 'group_form' %>
+    </div>
   </div>
 </div>

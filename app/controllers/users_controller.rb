@@ -32,18 +32,10 @@ class UsersController < ApplicationController
   def index
     if params[:usernamesearch].present?
       @users = User.where('name ILIKE ?', '%' + params[:usernamesearch] + '%')
-      # binding.pry
       redirect_to group_path(params[:group_id])
-      #
-      # respond_to do |format|
-      #   format.js { redirect_to group_path(params[:group_id]) }
-      # end
-
-
     else
       @users = User.where :is_active => true
     end
-
   end
 
   def incremental_search

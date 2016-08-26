@@ -1,5 +1,3 @@
-
-
 <%=form_for message, remote: true, authenticity_token: true do |f|%>
   <%= f.label :your_message%>:
   <textarea class="form-control" data-textarea="message" name="message[content_display]" id="message_content_display"></textarea>
@@ -11,6 +9,7 @@
   <div class="preview hidden">
     <div class="preview_left">
     </div>
+    <!-- For future version -->
     <!-- <div class="preview_right">
       <div class="say_yes">
         <span class="glyphicon  glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -22,7 +21,6 @@
   </div>
   <div class="chat_options">
     <%= f.submit "Send", class: "btn btn-primary messagesendbutton",  data: {send: "message"}%>
-    <!-- <div class="messagediscardbutton">Disss</div> -->
     <div class="btn btn-primary messagediscardbutton">Discard</div>
     <span class=" activate_camera glyphicon glyphicon-camera" aria-hidden="true"></span>
     <span class=" activate_video glyphicon glyphicon-facetime-video" aria-hidden="true"></span>

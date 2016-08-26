@@ -14,7 +14,7 @@ App.messages = App.cable.subscriptions.create('MessagesChannel', {
         if (data.id === app.current_user ){
           return '<p class="current_user time">' + time + '</p><p class="current_user"> <img class="message_images" src="' + data.message +'"> :<b class="message"> '+ data.user + '</b></p>';
         } else {
-          return '<p class="time">' + time + '</p><p><b>'+ data.user + ':</b> <img src="' + data.message +'"></p>';
+          return '<p class="time">' + time + '</p><p><b>'+ data.user + ':</b> <img class="message_images" src="' + data.message +'"></p>';
         }
 
       } else if  (data.message.match( /^\{.*\}$/ )){

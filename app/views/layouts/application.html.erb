@@ -3,23 +3,16 @@
   <head>
     <title>Talk2Me</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%#= cloudinary_js_config %>
   </head>
 
   <body>
-    <%# raise "hepl" %>
-
-<%# <!-- google map API key - AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc -->
-%>
-<!-- <script>var initMap = initMap || function () {}</script> -->
-<% if @current_user.present? %>
-    <script>
-      var app = app || {};
-      app.current_user = <%= @current_user.id %>;
-    </script>
+    <% if @current_user.present? %>
+      <script>
+        var app = app || {};
+        app.current_user = <%= @current_user.id %>;
+      </script>
     <% end %>
     <div class="container col-xs-12">
       <%= render :partial => 'layouts/header_form' %>
@@ -27,5 +20,4 @@
       <%= render :partial => 'layouts/footer_form' %>
     </div>
   </body>
-
 </html>
