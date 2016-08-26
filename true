@@ -1,2 +1,0 @@
-      invoke  active_record
-      create    db/migrate/20160826015234_add_isactive_to_groups.rb
