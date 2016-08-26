@@ -42,10 +42,12 @@
                 <% if (contact.id).eql?(@group.grp_admin_id) %>
                   <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
                   <%= link_to group_member_name , contact, :class => 'glyphicon glyphicon-king' %>
+                  <p class="user_status"><%= contact.status %></p>
                 <% else %>
                   <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
                   <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
                   <%= link_to  '<span class="glyphicon glyphicon glyphicon-scissors" aria-hidden="true"></span>'.html_safe, removeusersfromgroup_path(@group,contact)  %>
+                  <p class="user_status"><%= contact.status %></p>
                 <% end %>
             </li>
           <% end %>

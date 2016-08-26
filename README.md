@@ -11,7 +11,7 @@ A week
 - JavaScript
 - CSS
 - jQuery
-- Ruby
+- Ruby 2.2.4
 - Rails 5
 - Cloudinary
 - BootStrap
@@ -24,7 +24,7 @@ A week
 
 ## Features:
 
-#### #Sign Up as a new user
+##### Sign Up as a new user
 ##### Create a new group, add existing app users as members to the group
 ##### Access related - adding members, editing the group
 ##### Share your photos, gifs, location along with the normal text chat feature
@@ -37,7 +37,7 @@ This will just inactivate the account, so that a group/user can come to life aga
 ## Nice to have:
 Below listed are the features I would like to implement further to this:
 - Chats between two users only
-- Display status for each user
+- Display status for each user - DONE
 - Camera preview for photos,gifs
 - Detect when the user is typing
 - Password reset via mailer

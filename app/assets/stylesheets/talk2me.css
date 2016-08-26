@@ -212,7 +212,8 @@ div.controls{
   border: 1px solid #8c407e;
 }
 .messagediscardbutton{
-  margin-left: 20px;
+  margin-left: 5px;
+  margin-top: 0px;
   display:inline-block;
   color:#fff;
   border:1px solid #8c407e;
@@ -223,6 +224,11 @@ div.controls{
   max-width: 100px;
   padding: 5px;
   text-align: center;
+}
+.user_status {
+  font-style: italic;
+  font-size: 10px;
+  color:#8c407e;
 }
 .messagesendbutton{
   background: #8c407e;
@@ -302,4 +308,7 @@ input[type="submit"]{
 }
 a{
   color: #8c407e;
+}
+.user_create{
+  margin-left: 50px;
 }

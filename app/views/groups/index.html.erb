@@ -1,8 +1,8 @@
 <ul>
   <% @groups.each do |group| %>
-  <li class="groups_list col-xs-4 col-xs-offset-5 col-md-4 col-md-offset-5">
-    <%= cl_image_tag group.grp_image, :class=>'group_image' %>
-    <%= link_to  group.grp_name , group %>
-  </li>
+    <li class="groups_list col-xs-4 col-xs-offset-5 col-md-4 col-md-offset-5">
+      <%= cl_image_tag group.grp_image, :class=>'group_image' %>
+      <%= link_to  group.grp_name , group %>
+    </li>
   <% end %>
 </ul>

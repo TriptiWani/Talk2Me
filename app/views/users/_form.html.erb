@@ -24,10 +24,14 @@
       <%= f.password_field :password_confirmation ,:class=> "col-xs-4  col-md-4 col-md-offset-2"%>
   </fieldset>
   <fieldset>
+      <%= f.label :status ,:class=> "col-xs-2 col-xs-offset-2 col-md-3"%>
+      <%= f.text_field :status ,:class=> "col-xs-4  col-md-4 col-md-offset-2"%>
+  </fieldset>
+  <fieldset>
     <div class="user_image_field">
       <%= f.label :image ,:class=> "col-xs-2 col-xs-offset-2 col-md-3"%>
       <%= cl_image_upload_tag :image ,:class=> "col-xs-4  col-md-4 col-md-offset-2" %>
     </div>
   </fieldset>
-  <%= f.submit 'Create User',:class=> "col-xs-3 col-xs-offset-7 col-md-3 col-md-offset-6 btn btn-primary loginBtn" %>
+  <%= f.submit 'Submit',:class=> "btn btn-primary user_create" %>
 <% end %>
