@@ -25,13 +25,14 @@
   </fieldset>
   <fieldset>
       <%= f.label :status ,:class=> "col-xs-2 col-xs-offset-2 col-md-3"%>
-      <%= f.text_field :status ,:class=> "col-xs-4  col-md-4 col-md-offset-2"%>
+      <%#= f.text_field :status ,:class=> "col-xs-4  col-md-4 col-md-offset-2"%>
+      <%= f.select :status,['Available','Busy','Do not disturb','No calls, only messages','Killing all humans'],:include_blank => true, :class => 'col-xs-4  col-md-4 col-md-offset-2' %>
   </fieldset>
   <fieldset>
     <div class="user_image_field">
       <%= f.label :image ,:class=> "col-xs-2 col-xs-offset-2 col-md-3"%>
-      <%= cl_image_upload_tag :image ,:class=> "col-xs-4  col-md-4 col-md-offset-2" %>
+      <%= cl_image_upload_tag :image ,:class=> "col-xs-4  col-md-4 col-md-offset-2 cl_img" %>
     </div>
   </fieldset>
-  <%= f.submit 'Submit',:class=> "btn btn-primary user_create" %>
+  <%= f.submit 'Submit',:class=> "btn btn-primary user_create_btn" %>
 <% end %>

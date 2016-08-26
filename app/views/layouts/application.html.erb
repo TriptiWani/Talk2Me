@@ -15,7 +15,11 @@
       </script>
     <% end %>
     <div class="container col-xs-12">
-      <%= render :partial => 'layouts/header_form' %>
+      <% if @current_user.present? %>
+        <%= render :partial => 'layouts/header_form' %>
+      <% else %>
+          <%= render :partial => 'layouts/header_form' %>
+      <% end %>
       <%= yield %>
       <%= render :partial => 'layouts/footer_form' %>
     </div>

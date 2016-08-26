@@ -309,6 +309,15 @@ input[type="submit"]{
 a{
   color: #8c407e;
 }
-.user_create{
-  margin-left: 50px;
+.new_user{
+  /*margin-left: 50px;*/
+  position: relative;
+}
+.user_create_btn {
+  position:absolute;
+  left:10vw;
+}
+.cl_img {
+  position: absolute;
+  left:10vw;
 }
