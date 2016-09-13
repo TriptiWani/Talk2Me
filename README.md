@@ -1,7 +1,7 @@
 # **Talk2Me**
 We all love to share our thoughts,photos,locations,etc. with our friends..So here it is!!
 
-This is my Final Project on web-based group chat application **Inventory Management** as part of my Web Development Immersive 15 with General Assembly.
+This is my Final Project on web-based group chat application as part of my Web Development Immersive 15 with General Assembly.
 
 ## Duration:
 A week
@@ -16,7 +16,6 @@ A week
 - Cloudinary
 - BootStrap
 - bcrypt
-- httparty
 - Heroku
 - Gifshot.js
 - GoogleMaps.js
@@ -28,6 +27,7 @@ A week
 ##### Create a new group, add existing app users as members to the group
 ##### Access related - adding members, editing the group
 ##### Share your photos, gifs, location along with the normal text chat feature
+##### Displays if a group member is typing.
 ##### Delete the existing user/group, if user wishes to:
 This will just inactivate the account, so that a group/user can come to life again easily!
 
@@ -39,7 +39,7 @@ Below listed are the features I would like to implement further to this:
 - Camera preview for photos,gifs
 - Detect when the user is typing
 - Password reset via mailer
-- Code refactoring: The code looks bulky. Could be improved
+- Code refactoring: The code may be bulky. Could be improved
 
 ## Link:
  [Talk2Me](https://talk2meapp.herokuapp.com/)

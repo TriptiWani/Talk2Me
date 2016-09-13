@@ -65,7 +65,7 @@ p.message_content{
    height: 300px;
  }
 }
-.error_message{
+.error_message,.typing{
   animation: blink-animation 1s steps(5, start) infinite;
  -webkit-animation: blink-animation 1s steps(5, start) infinite;
 }

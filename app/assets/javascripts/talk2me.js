@@ -71,8 +71,10 @@ var emptyMessageField = function(){
     $('#message_content_display').val('');
   },10);
 };
+var checkIfTyping = function(){
 
-var userTyping = function(){
+};
+  var userTyping = function(){
   var typingTimer;
   var doneTypingInterval = 10;
   var finaldoneTypingInterval = 500;
@@ -334,5 +336,26 @@ $(document).ready(function(){
     }
   });
 
+  //typing check
+
+  var textarea = $('#message_content_display');
+  var typingStatus = $('.typing');
+  var lastTypedTime = new Date(0); // it's 01/01/1970
+  var typingDelayMillis = 5000; // how long user can "think about his spelling" before we show "No one is typing -blank space." message
+
+  var refreshTypingStatus = function() {
+     if (!textarea.is(':focus') || textarea.val() === '' || new Date().getTime() - lastTypedTime.getTime() > typingDelayMillis) {
+         typingStatus.html('');
+     } else {
+         typingStatus.html('Some member is entering text');
+     }
+  };
+  var updateLastTypedTime = function() {
+     lastTypedTime = new Date();
+  };
+
+  setInterval(refreshTypingStatus, 100);
+  textarea.keypress(updateLastTypedTime);
+  textarea.blur(refreshTypingStatus);
 
 });

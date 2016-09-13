@@ -4,20 +4,11 @@
   <%= f.hidden_field :content, class: "form-control", data: {textarea: "message"}%>
   <%= f.hidden_field :group_id, value: group.id %>
   <div id="typing">
-    <p class="typing"></p>
+    <p class="typing old_messages"></p>
   </div>
   <div class="preview hidden">
     <div class="preview_left">
     </div>
-    <!-- For future version -->
-    <!-- <div class="preview_right">
-      <div class="say_yes">
-        <span class="glyphicon  glyphicon glyphicon-ok" aria-hidden="true"></span>
-      </div>
-      <div class="say_no">
-        <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
-      </div>
-    </div> -->
   </div>
   <div class="chat_options">
     <%= f.submit "Send", class: "btn btn-primary messagesendbutton",  data: {send: "message"}%>
@@ -28,9 +19,7 @@
     </span>
     <div id="enter-to-send">
       <%= check_box("enter", "to-send", {}, "no", "yes") %>
-      <%#= radio_button_tag 'enter-to-send', 'no' %>
       <label class="send-option-label" for="enter-to-send-checkbox">press enter to send</label>
     </div>
-    <!-- <div id="enter-to-send"><input id="enter-to-send-checkbox" class="send-option" type="checkbox" value=""><label class="send-option-label" for="enter-to-send-checkbox">press enter to send</label></div> -->
   </div>
 <%end%>
