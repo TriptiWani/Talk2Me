@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get '/incremental_user_add' => 'groups#add_users_to_group'
   post '/add_image_as_message' => 'messages#create'
   get '/group/:group_id/user/:user_id' => 'groups#remove_user_from_group' , as: "removeusersfromgroup"
+  get '/groups/:id/:message_count' => 'groups#show' , as: "displaymessages"
 end

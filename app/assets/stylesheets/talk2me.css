@@ -24,6 +24,13 @@
   height: 100px;
   border-radius: 50%;
 }
+p.message_content{
+  background-color: rgba(201, 128, 184, 0.19);
+  width:auto;
+}
+p.message_content{
+  background-color: rgba(201, 128, 184, 0.19);
+}
 .greetings {
   font-size: 20px;
 }
@@ -301,7 +308,7 @@ a:hover,input[type="submit"]:hover,.messagesendbutton:hover,.messagesendbutton:f
 }
 
 input[type="submit"]{
-  margin: 5px;
+  width: auto !important;
 }
 .navbar-inverse{
   background-color: #8c407e;
@@ -320,4 +327,13 @@ a{
 .cl_img {
   position: absolute;
   left:10vw;
+}
+#enter-to-send{
+  display: inline-block;
+}
+#logo{
+  text-align: center;
+}
+.messagesendbutton{
+  margin-top: 0;
 }

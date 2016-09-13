@@ -1,6 +1,6 @@
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc">
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQhiJp0Ee3xKve1KYOLfVY0kF9lHF1xrc">
 
-</script>
+</script> -->
 <div class="groupview">
   <div class="group_header">
     <div class="group_header_left col-xs-2">
@@ -47,7 +47,7 @@
                   <%= link_to (cl_image_tag contact.image , :class => 'user_image') , contact  %>
                   <%= link_to group_member_name , contact , :class => 'glyphicon glyphicon-pawn'%>
                   <%= link_to  '<span class="glyphicon glyphicon glyphicon-scissors" aria-hidden="true"></span>'.html_safe, removeusersfromgroup_path(@group,contact)  %>
-                  <p class="user_status"><%= contact.status %></p>
+                  <p class="  user_status"><%= contact.status %></p>
                 <% end %>
             </li>
           <% end %>
@@ -57,14 +57,15 @@
 
     <div class="group_body_right col-xs-10">
       <div class="panel panel-default">
-        <div>
+        <div class="old_messages">
           <% if @group.messages.count > 10 %>
-            <p class="old_messages">View older messages</p>
+            <!-- <p >View older messages</p> -->
+            <%= link_to 'View older messages' , displaymessages_path(@group,@message_count),:class => 'old_messages' %>
           <% end %>
         </div>
         <% if @group.messages.any? %>
           <div class="panel-body" id="messages">
-            <%= render partial: 'messages/message', collection: @group.messages.order('created_at desc').take(10).reverse%>
+            <%= render partial: 'messages/message', collection: @group.messages.order('created_at desc').take(@message_count|| 10).reverse%>
           </div>
         <%else%>
           <div class="panel-body hidden" id="messages">

@@ -17,15 +17,17 @@
         <p> <%= @user.phone_number %></p>
       </fieldset>
     <% end %>
-    <fieldset>
-      <label for="user_groups">Member of:</label>
-      <ul>
-        <% @user.groups.each do |group| %>
-          <li class="groups_list">
-            <%= group.grp_name %>
-          </li>
-        <% end %>
-      </ul>
-    </fieldset>
+    <% if @user.groups.present? %>
+      <fieldset>
+        <label for="user_groups">Member of:</label>
+        <ul>
+          <% @user.groups.each do |group| %>
+            <li class="groups_list">
+              <%= group.grp_name %>
+            </li>
+          <% end %>
+        </ul>
+      </fieldset>
+    <% end %>
   </div>
 </div>

@@ -187,6 +187,7 @@ $(document).ready(function(){
   });
   $('.messagediscardbutton').on('click',function(){
     emptyMessageField();
+    $('#message_content_display').removeClass('hidden');
     clearPreview();
   });
 
@@ -233,9 +234,14 @@ $(document).ready(function(){
               $new_member_image.attr('href','/users/'+ data['id']);
               $new_member_image.html($img);
 
+              $status = $('<p></p>');
+              $status.addClass('user_status');
+              $status.html(data['status']);
+
               $new_member_image.appendTo($new_member);
               $new_member_name.appendTo($new_member);
               $remove_user.appendTo($new_member);
+              $status.appendTo($new_member);
 
               $new_member.appendTo('.group_members_list');
             }
@@ -252,7 +258,9 @@ $(document).ready(function(){
               // debug
               //console.log('FAILLL');
               alert('Contact already present');
-            } else{
+            } else if (data.responseText === 'Please request group admin to add this member') {
+              alert('Please request group admin to add this member');
+            }else{
               alert('Unable to add user to the group. Try again after sometime');
             }
             $('#search').html('');
@@ -306,10 +314,25 @@ $(document).ready(function(){
   .on("ajax:beforeSend",function(e,xhr,settings){
 
   }).on("ajax:complete",function(e,status,xhr){
-    // debug
-    //console.log('inside ajax complete');
     emptyMessageField();
     clearPreview();
     $('#message_content_display').removeClass('hidden');
   });
+  $('#enter_to-send').on('click',function(){
+    if ($(this).val() === 'no'){
+      $(this).val('yes');
+    } else {
+      $(this).val('no');
+    }
+  });
+  // $('#message_content_display').val()
+  $('textarea.form-control').keypress(function(e){
+    // console.log(e.which);
+    if (($('#enter_to-send').val() === 'yes') && (e.which === 13)){
+        e.preventDefault();
+        $('.messagesendbutton').click();
+    }
+  });
+
+
 });

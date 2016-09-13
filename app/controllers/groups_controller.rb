@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+
   def index
     raw_groups = @current_user.groups
     @groups = []
@@ -27,10 +28,17 @@ class GroupsController < ApplicationController
   end
 
   def show
+    if (params[:message_count]).present?
+      @message_count = (params[:message_count]).to_i
+      @message_count+= 10
+    else
+      @message_count = 10
+    end
     @group = Group.find_by(:id => params[:id])
     if @group.is_active.eql?false
       redirect_to root_path
     else
+
       is_member = ''
       @message = Message.new
       if !(@group.users.include?(@current_user))
@@ -84,8 +92,10 @@ class GroupsController < ApplicationController
       user_to_be_added = 'Contact is already added'
       render :json => user_to_be_added, :status => :ok
     else
-      if user_to_be_added.present? && @group_to_add.present?
+      if user_to_be_added.present? && @group_to_add.present? && (@current_user.id).eql?(@group_to_add.grp_admin_id)
         @group_to_add.users << user_to_be_added
+      elsif (user_to_be_added.present? && @group_to_add.present?) && !(@current_user.id).eql?(@group_to_add.grp_admin_id)
+        user_to_be_added = 'Please request group admin to add this member'
       else
         flash[:notice] = 'User not present'
       end
@@ -98,8 +108,10 @@ class GroupsController < ApplicationController
     user_id = params[:user_id]
     @group = Group.find_by(:id => group_id)
     user = User.find_by( :id => user_id)
+    if (@current_user.id).eql?(@group.grp_admin_id)
+      (@group.users).delete(user)
+    end
 
-    (@group.users).delete(user)
     redirect_to @group
   end
 

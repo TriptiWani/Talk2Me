@@ -1,6 +1,6 @@
 <%=form_for message, remote: true, authenticity_token: true do |f|%>
   <%= f.label :your_message%>:
-  <textarea class="form-control" data-textarea="message" name="message[content_display]" id="message_content_display"></textarea>
+  <textarea class="form-control" data-textarea="message" name="message[content_display]" id="message_content_display" autofocus="true"></textarea>
   <%= f.hidden_field :content, class: "form-control", data: {textarea: "message"}%>
   <%= f.hidden_field :group_id, value: group.id %>
   <div id="typing">
@@ -26,5 +26,11 @@
     <span class=" activate_video glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
     <span class=" activate_location glyphicon glyphicon-map-marker" aria-hidden="true">
     </span>
+    <div id="enter-to-send">
+      <%= check_box("enter", "to-send", {}, "no", "yes") %>
+      <%#= radio_button_tag 'enter-to-send', 'no' %>
+      <label class="send-option-label" for="enter-to-send-checkbox">press enter to send</label>
+    </div>
+    <!-- <div id="enter-to-send"><input id="enter-to-send-checkbox" class="send-option" type="checkbox" value=""><label class="send-option-label" for="enter-to-send-checkbox">press enter to send</label></div> -->
   </div>
 <%end%>

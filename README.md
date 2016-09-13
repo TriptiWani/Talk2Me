@@ -28,8 +28,6 @@ A week
 ##### Create a new group, add existing app users as members to the group
 ##### Access related - adding members, editing the group
 ##### Share your photos, gifs, location along with the normal text chat feature
-##### Once the order is placed, admin can either Approve or Reject the order.
-##### The quantity in the warehouse is updated after 'approving' the order.
 ##### Delete the existing user/group, if user wishes to:
 This will just inactivate the account, so that a group/user can come to life again easily!
 
